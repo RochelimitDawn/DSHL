@@ -1,0 +1,25 @@
+# dsh-plugin-linuxdo 的 cordis.yml
+#
+# 入口指向 lib/index.js（esbuild 自包含单文件 bundle）：
+# 全量依赖已内联，仅剩 node: 内置导入，任何 Node 20+ 环境零构建直接加载。
+# 源码开发态见 src/，npm run build 会重新生成 lib/index.js。
+#
+# 手动 --patch 加载时把 name 换成完整 file:// 路径：
+#   Linux/macOS: file:///absolute/path/to/DSHL/lib/index.js
+#   Windows:     file:///D:/path/to/DSHL/lib/index.js
+#   pnpm dsh web --patch ./cordis.yml
+#
+# 可选行内配置（全部可省略，见 src/config.ts 与 README 配置表）：
+#   - id: linuxdo
+#     name: 'file:///absolute/path/to/DSHL/lib/index.js'
+#     config:
+#       baseUrl: https://linux.do
+#       curlImpersonatePath: /usr/local/bin/curl_chrome116
+#       localIndexEnabled: true
+#       sites:
+#         - name: linuxdo
+#           baseUrl: https://linux.do
+
+- insert:
+    - id: linuxdo
+      name: './lib/index.js'

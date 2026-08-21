@@ -1,0 +1,31 @@
+{
+  "name": "dsh-plugin-linuxdo",
+  "version": "0.1.1",
+  "description": "DeepSeek Harness 插件：把 Linux.do（Discourse）站内信息变成 AI 可检索的知识库",
+  "type": "module",
+  "license": "GPL-3.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib",
+    "cordis.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=lib/index.js --log-level=warning && node scripts/inline-version.mjs",
+    "test": "npm run build && node --test --test-reporter=spec 'lib/*.test.js' 'lib/**/*.test.js'",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.0.1-rc.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "esbuild": "^0.27.0",
+    "typescript": "^5.9.2"
+  }
+}
